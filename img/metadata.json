@@ -1,0 +1,15 @@
+{
+    "name": "Naruto Uzumaki, My first IPFS NFT",
+    "description": "This NFT Naruto image and metadata are stored on IPFS",
+    "image": "ipfs://QmP7TbWiYBc9XcwM9VBPfWhjpey99L3tT5fASYMKKZWbKn",
+    "attributes": [
+    {
+      "trait_type": "Storage",
+      "value": "IPFS"
+    },
+    {
+      "trait_type": "Format",
+      "value": "Image"
+    }
+  ]
+}
