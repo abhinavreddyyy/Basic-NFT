@@ -19,36 +19,21 @@ contract BasicNFT is ERC721 {
         s_tokenCounter = 0;
     }
 
-    /**
-     * @notice Mints a new NFT with the provided metadata URI
-     * @param tokenUri The IPFS URI pointing to the NFT metadata
-     * @dev Uses _safeMint to ensure the receiving address can handle ERC721 tokens
-     * Emits an {NFTMinted} event
-     */
+    // most of the logic of these functions and all are taken from eips.ethereum.org/EIPs/eip-721
     function mintNFT(string memory tokenUri) public {
         s_tokenIdToUri[s_tokenCounter] = tokenUri;
-        _safeMint(msg.sender, s_tokenCounter);
-        emit NFTMinted(s_tokenCounter, msg.sender, tokenUri);
+        _safeMint(msg.sender, s_tokenCounter); // _safeMint is from ERC721
         s_tokenCounter++;
     }
 
-    /**
-     * @notice Returns the metadata URI for a given token ID
-     * @param tokenId The ID of the token to query
-     * @return The IPFS URI pointing to the token's metadata
-     * @dev Overrides the {ERC721-tokenURI} function to return custom IPFS URIs
-     */
     function tokenURI(
         uint256 tokenId
     ) public view override returns (string memory) {
+        /* tokenURI indentifies resource(uint256 tokenId here), overided from ERC721 
+        (has it's own virtual tokenURI function) and it returns a string(because URI is string)
+        which points to the correct location  in IPFS where the metadata for a particular tokenId is stored 
+        */
+        // return "ipfs://QmYBwFv1oaFknnjd8yPzWHjvu9GT9mEqh9cT3V5UHmK93U"; // ipfs of metadata
         return s_tokenIdToUri[tokenId];
-    }
-
-    /**
-     * @notice Returns the total number of NFTs minted
-     * @return The current token counter value
-     */
-    function getTokenCounter() public view returns (uint256) {
-        return s_tokenCounter;
     }
 }
